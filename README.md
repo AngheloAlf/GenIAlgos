@@ -2,6 +2,8 @@
 
 ## References
 
+### Game specific
+
 - [Sprites routine](https://www.youtube.com/watch?v=ZI50XUeN6QE)
 - [ROM map](http://datacrystal.romhacking.net/wiki/Pokémon_Red_and_Blue:ROM_map)
 - [Dex data structure](http://www.romhacking.net/documents/522/)
@@ -9,6 +11,15 @@
 - [How to find sprite data](https://www.pokecommunity.com/showthread.php?t=136169)
 - [Base stats data structure](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_base_stats_data_structure_in_Generation_I)
 - [__](https://hax.iimarckus.org/post/16313/#p16313)
+
+### Hardware specific
+
+- [Bank Switching](https://b13rg.github.io/Gameboy-Bank-Switching/)
+- [Opcodes](https://rednex.github.io/rgbds/gbz80.7.html#CP_A,r8)
+
+### Software utilities
+
+- [Debugger](https://problemkaputt.de/gmb.htm#DOWNLOAD)
 
 ### Other references
 
