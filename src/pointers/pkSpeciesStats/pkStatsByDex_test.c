@@ -11,8 +11,8 @@
 #define UNDERLINE(_text) "\e[4m"_text"\e[0m"
 
 void check_arguments(int argc, char **argv){
-    if(argc < 2){
-        printf("Usage: %s %s\n", argv[0], UNDERLINE("sprite_file"));
+    if(argc < 3){
+        printf("Usage: %s %s %s\n", argv[0], UNDERLINE("romfile"), UNDERLINE("dex_number"));
         exit(-1);
     }
 }
@@ -68,6 +68,48 @@ void read_file(const char *filename, size_t bytes_to_read, uint8_t *dst_buff){
 }
 
 
+void show_pk_stats(const PkSpeciesStats_t *entry){
+    printf("dexId: %03"PRIu8"\n", entry->dexId);
+
+    printf("\n");
+    printf("baseHp:      0x%02"PRIX8"\n", entry->baseStats.hp);
+    printf("baseAttack:  0x%02"PRIX8"\n", entry->baseStats.attack);
+    printf("baseDefense: 0x%02"PRIX8"\n", entry->baseStats.defense);
+    printf("baseSpeed:   0x%02"PRIX8"\n", entry->baseStats.speed);
+    printf("baseSpecial: 0x%02"PRIX8"\n", entry->baseStats.special);
+
+    printf("\n");
+    printf("type1:        0x%02"PRIX8"\n", entry->type1);
+    printf("type2:        0x%02"PRIX8"\n", entry->type2);
+    printf("catchRate:    0x%02"PRIX8"\n", entry->catchRate);
+    printf("baseExpYield: 0x%02"PRIX8"\n", entry->baseExpYield);
+
+    printf("\n");
+    printf("dimFrontSprite: 0x%02"PRIX8"\n", entry->spritePtrs.dimFrontSprite);
+    printf("frontSpritePtr: 0x%04"PRIX16"\n", entry->spritePtrs.frontSpritePtr);
+    printf("backSpritePtr:  0x%04"PRIX16"\n", entry->spritePtrs.backSpritePtr);
+
+    printf("\n");
+    printf("lvl1Move0: 0x%02"PRIX8"\n", entry->lvl1Moves.move0);
+    printf("lvl1Move1: 0x%02"PRIX8"\n", entry->lvl1Moves.move1);
+    printf("lvl1Move2: 0x%02"PRIX8"\n", entry->lvl1Moves.move2);
+    printf("lvl1Move3: 0x%02"PRIX8"\n", entry->lvl1Moves.move3);
+
+    printf("\n");
+    printf("growthRate: 0x%02"PRIX8"\n", entry->growthRate);
+
+    printf("\n");
+    printf("tmHmFlag0: 0x%02"PRIX8"\n", entry->tmHmFlags.flag0);
+    printf("tmHmFlag1: 0x%02"PRIX8"\n", entry->tmHmFlags.flag1);
+    printf("tmHmFlag2: 0x%02"PRIX8"\n", entry->tmHmFlags.flag2);
+    printf("tmHmFlag3: 0x%02"PRIX8"\n", entry->tmHmFlags.flag3);
+    printf("tmHmFlag4: 0x%02"PRIX8"\n", entry->tmHmFlags.flag4);
+    printf("tmHmFlag5: 0x%02"PRIX8"\n", entry->tmHmFlags.flag5);
+    printf("tmHmFlag6: 0x%02"PRIX8"\n", entry->tmHmFlags.flag6);
+    printf("tmHmFlag7: 0x%02"PRIX8"\n", entry->tmHmFlags.flag7);
+}
+
+
 int main(int argc, char **argv){
     check_arguments(argc, argv);
     const char *filename = argv[1];
@@ -88,48 +130,9 @@ int main(int argc, char **argv){
     PkSpeciesStats_t stats_entry;
     load_pk_stats_by_dex_to_struct(&stats_entry, data, 0, dex_num);
 
+    printf("\n%ld\n", dex_num);
+    show_pk_stats(&stats_entry);
+
     free(data);
-
-    printf("%ld\n", dex_num);
-
-    printf("dexId: %03"PRIu8"\n", stats_entry.dexId);
-
-    printf("\n");
-    printf("baseHp:      0x%02"PRIX8"\n", stats_entry.baseStats.hp);
-    printf("baseAttack:  0x%02"PRIX8"\n", stats_entry.baseStats.attack);
-    printf("baseDefense: 0x%02"PRIX8"\n", stats_entry.baseStats.defense);
-    printf("baseSpeed:   0x%02"PRIX8"\n", stats_entry.baseStats.speed);
-    printf("baseSpecial: 0x%02"PRIX8"\n", stats_entry.baseStats.special);
-
-    printf("\n");
-    printf("type1:        0x%02"PRIX8"\n", stats_entry.type1);
-    printf("type2:        0x%02"PRIX8"\n", stats_entry.type2);
-    printf("catchRate:    0x%02"PRIX8"\n", stats_entry.catchRate);
-    printf("baseExpYield: 0x%02"PRIX8"\n", stats_entry.baseExpYield);
-
-    printf("\n");
-    printf("dimFrontSprite: 0x%02"PRIX8"\n", stats_entry.spritePtrs.dimFrontSprite);
-    printf("frontSpritePtr: 0x%04"PRIX16"\n", stats_entry.spritePtrs.frontSpritePtr);
-    printf("backSpritePtr:  0x%04"PRIX16"\n", stats_entry.spritePtrs.backSpritePtr);
-
-    printf("\n");
-    printf("lvl1Move0: 0x%02"PRIX8"\n", stats_entry.lvl1Moves.move0);
-    printf("lvl1Move1: 0x%02"PRIX8"\n", stats_entry.lvl1Moves.move1);
-    printf("lvl1Move2: 0x%02"PRIX8"\n", stats_entry.lvl1Moves.move2);
-    printf("lvl1Move3: 0x%02"PRIX8"\n", stats_entry.lvl1Moves.move3);
-
-    printf("\n");
-    printf("growthRate: 0x%02"PRIX8"\n", stats_entry.growthRate);
-
-    printf("\n");
-    printf("tmHmFlag0: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag0);
-    printf("tmHmFlag1: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag1);
-    printf("tmHmFlag2: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag2);
-    printf("tmHmFlag3: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag3);
-    printf("tmHmFlag4: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag4);
-    printf("tmHmFlag5: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag5);
-    printf("tmHmFlag6: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag6);
-    printf("tmHmFlag7: 0x%02"PRIX8"\n", stats_entry.tmHmFlags.flag7);
-
     return 0;
 }
