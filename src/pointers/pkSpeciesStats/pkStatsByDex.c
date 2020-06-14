@@ -1,18 +1,19 @@
 #include "pkStatsByDex.h"
 
 
-size_t calculate_pk_stat_entry_offset(size_t dex_number){
+uint16_t calculate_pk_stat_entry_offset(uint8_t dex_number){
+    --dex_number;
     return dex_number*PKSTSBYID_STATS_ENTRY_LEN;
 }
 
-void load_pk_stats_by_dex_to_arr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, size_t pkDex){
-    size_t entry_offset = calculate_pk_stat_entry_offset(pkDex);
+void load_pk_stats_by_dex_to_arr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex){
+    uint16_t entry_offset = calculate_pk_stat_entry_offset(pkDex);
     for(size_t i = 0; i < PKSTSBYID_STATS_ENTRY_LEN; ++i){
-        dst_arr[i] = src_data[PKSTSBYID_STATS_BASE_ENTRY + entry_offset + src_data_offset + i];
+        dst_arr[i] = src_data[PKSTSBYID_STATS_ENTRY_BASE + entry_offset + src_data_offset + i];
     }
 }
 
-void load_pk_stats_by_dex_to_struct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, size_t pkDex){
+void load_pk_stats_by_dex_to_struct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex){
     uint8_t aux_arr[PKSTSBYID_STATS_ENTRY_LEN];
     load_pk_stats_by_dex_to_arr(aux_arr, src_data, src_data_offset, pkDex);
 
@@ -30,8 +31,8 @@ void load_pk_stats_by_dex_to_struct(PkSpeciesStats_t *dst_stru, const uint8_t *s
     dst_stru->baseExpYield  = aux_arr[0x09];
 
     dst_stru->spritePtrs.dimFrontSprite =  aux_arr[0x0A];
-    dst_stru->spritePtrs.frontSpritePtr = (aux_arr[0x0B]<<8) | aux_arr[0x0C];
-    dst_stru->spritePtrs.backSpritePtr  = (aux_arr[0x0D]<<8) | aux_arr[0x0E];
+    dst_stru->spritePtrs.frontSpritePtr = (aux_arr[0x0C]<<8) | aux_arr[0x0B];
+    dst_stru->spritePtrs.backSpritePtr  = (aux_arr[0x0E]<<8) | aux_arr[0x0D];
 
     dst_stru->lvl1Moves.move0 = aux_arr[0x0F];
     dst_stru->lvl1Moves.move1 = aux_arr[0x10];

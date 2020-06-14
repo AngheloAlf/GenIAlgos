@@ -67,6 +67,17 @@ void read_file(const char *filename, size_t bytes_to_read, uint8_t *dst_buff){
     assert(retval >= 0);
 }
 
+uintmax_t str_to_number(const char *str_val){
+    errno = 0;
+    char *endptr;
+    uintmax_t num_val = strtoumax(str_val, &endptr, 10);
+    if(errno){
+        fprintf(stderr, "%s\n", strerror(errno));
+        exit(-1);
+    }
+    return num_val;
+}
+
 
 void show_pk_stats(const PkSpeciesStats_t *entry){
     printf("dexId: %03"PRIu8"\n", entry->dexId);
@@ -113,15 +124,7 @@ void show_pk_stats(const PkSpeciesStats_t *entry){
 int main(int argc, char **argv){
     check_arguments(argc, argv);
     const char *filename = argv[1];
-    uintmax_t dex_num;
-
-    errno = 0;
-    char *endptr;
-    dex_num = strtoumax(argv[2], &endptr, 10);
-    if(errno){
-        fprintf(stderr, "%s\n", strerror(errno));
-        exit(-1);
-    }
+    uint8_t dex_num = str_to_number(argv[2]);
 
     size_t file_size = get_file_size(filename);
     uint8_t *data = malloc(file_size*sizeof(uint8_t));
@@ -131,6 +134,8 @@ int main(int argc, char **argv){
     load_pk_stats_by_dex_to_struct(&stats_entry, data, 0, dex_num);
 
     printf("\n%ld\n", dex_num);
+    printf("entry_offset: 0x%08"PRIX16"\n", calculate_pk_stat_entry_offset(dex_num));
+    printf("entry_pos:    0x%08"PRIX32"\n", calculate_pk_stat_entry_offset(dex_num) + PKSTSBYID_STATS_ENTRY_BASE);
     show_pk_stats(&stats_entry);
 
     free(data);

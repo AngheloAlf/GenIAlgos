@@ -6,7 +6,7 @@
 #include <stdint.h>
 
 
-#define PKSTSBYID_STATS_BASE_ENTRY  0x383C2
+#define PKSTSBYID_STATS_ENTRY_BASE  0x383DE
 #define PKSTSBYID_STATS_ENTRY_LEN   0x1C
 
 typedef enum{
@@ -86,9 +86,9 @@ typedef struct{
 } PkSpeciesStats_t;
 
 
-size_t calculate_pk_stat_entry_offset(size_t dex_number);
-void load_pk_stats_by_dex_to_arr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, size_t pkDex);
-void load_pk_stats_by_dex_to_struct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, size_t pkDex);
+uint16_t calculate_pk_stat_entry_offset(uint8_t dex_number);
+void load_pk_stats_by_dex_to_arr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
+void load_pk_stats_by_dex_to_struct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
 
 
 #endif /* POINTERS_PKSPECIESSTATS_PKSTATSBYDEX_H */
