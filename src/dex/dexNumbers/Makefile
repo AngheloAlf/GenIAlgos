@@ -1,5 +1,5 @@
-MODULE_NAME  = bankSwitch
-SOURCE_FILES = getRBankByPkId.c
+MODULE_NAME  = dexNumbers
+SOURCE_FILES = dexNumById.c
 
 all: module
 
@@ -12,4 +12,4 @@ module_test: module $(MODULE_NAME)_test.c
 
 
 clean:
-	rm -f *.o *.elf
+	rm *.o *.elf
