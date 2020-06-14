@@ -1,9 +1,7 @@
-#include "toBmp.h"
+#include "bmp.h"
 
 #include <stdio.h>
 #include <assert.h>
-
-/// https://cdn.hackaday.io/files/274271173436768/Simplified%20Windows%20BMP%20Bitmap%20File%20Format%20Specification.htm
 
 
 void write_1_byte(FILE *f, uint8_t val){

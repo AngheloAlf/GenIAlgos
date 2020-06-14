@@ -1,6 +1,6 @@
 #pragma once
-#ifndef TOBMP_H
-#define TOBMP_H
+#ifndef UTILS_IMAGE_BMP_H
+#define UTILS_IMAGE_BMP_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -14,4 +14,5 @@
 
 void toBmp_bitIndexed(const char *out_file, size_t arr_size, const uint8_t *in_arr, size_t bpp, uint32_t width, int32_t height, const uint32_t *colors);
 
-#endif /* TOBMP_H */
+
+#endif /* UTILS_IMAGE_BMP_H */

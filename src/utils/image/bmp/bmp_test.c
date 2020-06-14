@@ -1,4 +1,4 @@
-#include "toBmp.h"
+#include "bmp.h"
 
 
 #define WHITE   ((1 << 24) - 1)
