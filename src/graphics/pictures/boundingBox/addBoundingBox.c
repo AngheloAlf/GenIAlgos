@@ -6,11 +6,6 @@
 typedef struct{
     size_t size;
     uint8_t *arr;
-} Array8_t;
-
-typedef struct{
-    size_t size;
-    uint8_t *arr;
     size_t width, height;
 } Matrix8_t;
 
