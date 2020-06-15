@@ -1,9 +1,9 @@
-MODULE_NAME  = dexNumbers
-SOURCE_FILES = dexNumById.c
+MODULE_NAME     = io
+SOURCE_FILES    = getFileSize.c readFile.c
 
-LIBS            = -lio
-LIBS_PATHS      = -L. -L../../utils/io/
-INCLUDE_PATHS   = -I../../
+LIBS            = 
+LIBS_PATHS      = -L.
+INCLUDE_PATHS   = 
 
 STD         = -std=c11
 WARNINGS    = -Wall -Wextra
