@@ -1,5 +1,5 @@
-MODULE_NAME  = bankSwitch
-SOURCE_FILES = getRBankByPkId.c
+MODULE_NAME  = numbers
+SOURCE_FILES = strToNumber.c
 
 LIBS            = 
 LIBS_PATHS      = -L.

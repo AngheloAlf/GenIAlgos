@@ -1,6 +1,6 @@
 #pragma once
-#ifndef POINTERS_DEXNUMBERS_H
-#define POINTERS_DEXNUMBERS_H
+#ifndef DEX_DEXNUMBERS_H
+#define DEX_DEXNUMBERS_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -11,4 +11,4 @@
 uint8_t dexNumById(const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
 
 
-#endif /* POINTERS_DEXNUMBERS_H */
+#endif /* DEX_DEXNUMBERS_H */

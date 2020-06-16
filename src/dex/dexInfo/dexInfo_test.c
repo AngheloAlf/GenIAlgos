@@ -1,14 +1,11 @@
 #include "dexInfo.h"
 
 #include "utils/io/io.h"
+#include "utils/numbers/numbers.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
-#include <errno.h>
 #include <inttypes.h>
-#include <string.h>
-#include <ctype.h>
 
 
 #define UNDERLINE(_text) "\e[4m"_text"\e[0m"
@@ -20,26 +17,11 @@ void check_arguments(int argc, char **argv){
     }
 }
 
-uintmax_t str_to_number(const char *str_val){
-    if(isdigit(str_val[0]) == 0){
-        fprintf(stderr, "Expected a numerical secuence, not '%s'\n", str_val);
-        exit(errno);
-    }
-    errno = 0;
-    char *endptr;
-    uintmax_t num_val = strtoumax(str_val, &endptr, 10);
-    if(errno){
-        fprintf(stderr, "%s\n", strerror(errno));
-        exit(errno);
-    }
-    return num_val;
-}
-
 
 int main(int argc, char **argv){
     check_arguments(argc, argv);
     const char *filename = argv[1];
-    uint8_t internal_id = str_to_number(argv[2]);
+    uint8_t internal_id = strToNumber(argv[2]);
 
     // printf("Reading: %s\n", filename);
     size_t file_size = getFileSize(filename);
