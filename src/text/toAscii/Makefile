@@ -1,12 +1,12 @@
-MODULE_NAME  = dexInfo
-SOURCE_FILES = getDexInfo.c getDexInfosPtr.c getSpeciesName.c getDexEntries.c
+MODULE_NAME  = toAscii
+SOURCE_FILES = charAsAsciiStr.c
 
 LIBS            = 
 LIBS_PATHS      = -L.
 INCLUDE_PATHS   = 
 
-TEST_LIBS           = -lio -lnumbers
-TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/numbers/
+TEST_LIBS           = -lio -lerrorHandling -lnumbers -ldexInfo
+TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/errorHandling/ -L../../utils/numbers/ -L../../dex/dexInfo/
 TEST_INCLUDE_PATHS  = -I../../
 
 STD         = -std=c11
@@ -20,7 +20,6 @@ all: module
 
 module: $(MODULE_NAME).h $(SOURCE_FILES)
 	gcc -c $(SOURCE_FILES) $(STD) $(WARNINGS) $(C_FLAGS) $(INCLUDE_PATHS) $(LIBS_PATHS) $(LIBS) $(DEBUG) $(OPTIMIZA)
-	rm -f lib$(MODULE_NAME).a
 	ar -rcs lib$(MODULE_NAME).a *.o
 
 module_test: module $(MODULE_NAME)_test.c
@@ -31,4 +30,4 @@ test_module: module_test
 
 
 clean:
-	rm -f *.o *.elf *.a
+	rm -f *.o *.elf
