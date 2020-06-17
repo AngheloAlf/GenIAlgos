@@ -1,9 +1,9 @@
-MODULE_NAME  = numbers
-SOURCE_FILES = strToNumber.c
+MODULE_NAME     = errorHandling
+SOURCE_FILES    = errnoHand.c
 
-LIBS            = -lerrorHandling
-LIBS_PATHS      = -L. -L../../utils/errorHandling/
-INCLUDE_PATHS   = -I../../
+LIBS            = 
+LIBS_PATHS      = -L.
+INCLUDE_PATHS   = 
 
 TEST_LIBS           = 
 TEST_LIBS_PATHS     = 

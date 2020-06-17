@@ -1,5 +1,7 @@
 #include "numbers.h"
 
+#include "utils/errorHandling/errorHandling.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -19,9 +21,7 @@ uintmax_t strToNumber(const char *str_val){
     char *endptr;
     uintmax_t num_val = strtoumax(str_val, &endptr, 10);
     if(errno){
-        fprintf(stderr, "%s\n", strerror(errno));
-        assert(!errno);
-        exit(errno);
+        showErrnoAndHalt();
     }
     return num_val;
 }

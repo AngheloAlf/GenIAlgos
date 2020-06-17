@@ -1,5 +1,7 @@
 #include "io.h"
 
+#include "utils/errorHandling/errorHandling.h"
+
 #include <assert.h>
 
 
@@ -7,16 +9,24 @@ size_t getFileSize(const char *filename){
     int retval;
 
     FILE *fp = fopen(filename, "rb");
-    assert(fp != NULL);
+    if(fp == NULL){
+        showErrnoAndHalt();
+    }
 
     retval = fseek(fp, 0L, SEEK_END);
-    assert(retval == 0);
+    if(retval != 0){
+        showErrnoAndHalt();
+    }
 
     long sz = ftell(fp);
-    assert(sz >= 0);
+    if(sz < 0){
+        showErrnoAndHalt();
+    }
 
     retval = fclose(fp);
-    assert(retval == 0);
+    if(retval != 0){
+        showErrnoAndHalt();
+    }
 
     return sz;
 }
@@ -26,16 +36,24 @@ size_t fgetFileSize(FILE *fp){
     int retval;
 
     retval = fgetpos(fp, &pos);
-    assert(retval == 0);
+    if(retval != 0){
+        showErrnoAndHalt();
+    }
 
     retval = fseek(fp, 0L, SEEK_END);
-    assert(retval == 0);
+    if(retval != 0){
+        showErrnoAndHalt();
+    }
 
     long sz = ftell(fp);
-    assert(sz >= 0);
+    if(sz < 0){
+        showErrnoAndHalt();
+    }
 
     retval = fsetpos(fp, &pos);
-    assert(retval == 0);
+    if(retval != 0){
+        showErrnoAndHalt();
+    }
 
     return sz;
 }

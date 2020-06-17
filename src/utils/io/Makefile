@@ -1,9 +1,9 @@
 MODULE_NAME     = io
 SOURCE_FILES    = getFileSize.c readFile.c
 
-LIBS            = 
-LIBS_PATHS      = -L.
-INCLUDE_PATHS   = 
+LIBS            = -lerrorHandling
+LIBS_PATHS      = -L. -L../../utils/errorHandling/
+INCLUDE_PATHS   = -I../../
 
 TEST_LIBS           = 
 TEST_LIBS_PATHS     = 
