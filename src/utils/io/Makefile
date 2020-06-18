@@ -1,12 +1,12 @@
 MODULE_NAME     = io
-SOURCE_FILES    = getFileSize.c readFile.c
+SOURCE_FILES    = getFileSize.c readFile.c writeFile.c
 
 LIBS            = -lerrorHandling
 LIBS_PATHS      = -L. -L../../utils/errorHandling/
 INCLUDE_PATHS   = -I../../
 
-TEST_LIBS           = 
-TEST_LIBS_PATHS     = 
+TEST_LIBS           = -lio -lnumbers
+TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/numbers/
 TEST_INCLUDE_PATHS  = 
 
 STD         = -std=c11
@@ -20,6 +20,7 @@ all: module
 
 module: $(MODULE_NAME).h $(SOURCE_FILES)
 	gcc -c $(SOURCE_FILES) $(STD) $(WARNINGS) $(C_FLAGS) $(INCLUDE_PATHS) $(LIBS_PATHS) $(LIBS) $(DEBUG) $(OPTIMIZA)
+	rm -f lib$(MODULE_NAME).a
 	ar -rcs lib$(MODULE_NAME).a *.o
 
 module_test: module $(MODULE_NAME)_test.c
