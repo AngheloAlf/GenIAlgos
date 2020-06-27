@@ -5,12 +5,12 @@ LIBS            =
 LIBS_PATHS      = -L.
 INCLUDE_PATHS   = 
 
-TEST_LIBS           = -lio -lnumbers
-TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/numbers/
-TEST_INCLUDE_PATHS  = -I../../
+TEST_LIBS           = -lio -lnumbers -lerrorHandling
+TEST_LIBS_PATHS     =  -L../../../utils/io/ -L../../../utils/numbers/ -L../../../utils/errorHandling/
+TEST_INCLUDE_PATHS  = -I../../../
 
 STD         = -std=c11
-WARNINGS    = -Wall -Wextra
+WARNINGS    = -Wall -Wextra -Wunused-macros -Wendif-labels
 C_FLAGS     = -fno-common -fPIC
 DEBUG       = -g
 OPTIMIZA    = -Og
