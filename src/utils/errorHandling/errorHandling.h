@@ -6,7 +6,6 @@
 
 
 noreturn void showErrnoAndHalt();
-
+void printBacktrace();
 
 #endif /* UTILS_ERRORHANDLING_H */
-

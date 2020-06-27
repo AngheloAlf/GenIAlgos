@@ -2,13 +2,12 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include <errno.h>
 #include <string.h>
 
 
 noreturn void showErrnoAndHalt(){
     fprintf(stderr, "errno %i: %s\n", errno, strerror(errno));
-    assert(!errno);
+    printBacktrace();
     exit(errno);
 }

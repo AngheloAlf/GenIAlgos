@@ -11,7 +11,7 @@ TEST_INCLUDE_PATHS  = -I../../../
 
 STD         = -std=c11
 WARNINGS    = -Wall -Wextra -Wunused-macros -Wendif-labels
-C_FLAGS     = -fno-common -fPIC
+C_FLAGS     = -fno-common -fPIC -rdynamic
 DEBUG       = -g
 OPTIMIZA    = -Og
 
