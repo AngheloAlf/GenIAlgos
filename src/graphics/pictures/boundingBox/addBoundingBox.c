@@ -13,7 +13,7 @@ typedef struct{
 static size_t calculate_offset(size_t width_in_tiles, size_t height_in_tiles, size_t bb_width, size_t bb_height, size_t bytes_per_tile){
     size_t y = height_in_tiles - bb_height;
     size_t x = (width_in_tiles - bb_width + 1)/2;
-    size_t offset = bb_height * x + y;
+    size_t offset = height_in_tiles * x + y;
     return bytes_per_tile * offset;
 }
 

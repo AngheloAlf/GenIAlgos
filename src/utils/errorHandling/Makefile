@@ -20,6 +20,7 @@ all: module
 
 module: $(MODULE_NAME).h $(SOURCE_FILES)
 	gcc -c $(SOURCE_FILES) $(STD) $(WARNINGS) $(C_FLAGS) $(INCLUDE_PATHS) $(LIBS_PATHS) $(LIBS) $(DEBUG) $(OPTIMIZA)
+	rm -f lib$(MODULE_NAME).a
 	ar -rcs lib$(MODULE_NAME).a *.o
 
 module_test: module $(MODULE_NAME)_test.c

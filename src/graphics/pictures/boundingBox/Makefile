@@ -5,8 +5,8 @@ LIBS            =
 LIBS_PATHS      = -L.
 INCLUDE_PATHS   = 
 
-TEST_LIBS           = -lio
-TEST_LIBS_PATHS     = -L../../../utils/io/
+TEST_LIBS           = -lio -lerrorHandling
+TEST_LIBS_PATHS     = -L../../../utils/io/ -L../../../utils/errorHandling/
 TEST_INCLUDE_PATHS  = -I../../../
 
 STD         = -std=c11

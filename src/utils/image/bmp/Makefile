@@ -3,10 +3,10 @@ SOURCE_FILES = toBmp.c
 
 LIBS            = 
 LIBS_PATHS      = -L.
-INCLUDE_PATHS   = 
+INCLUDE_PATHS   = -I../../../
 
-TEST_LIBS           = 
-TEST_LIBS_PATHS     = 
+TEST_LIBS           = -lio -lerrorHandling
+TEST_LIBS_PATHS     = -L../../../utils/io/ -L../../../utils/errorHandling/
 TEST_INCLUDE_PATHS  = 
 
 STD         = -std=c11
@@ -20,6 +20,7 @@ all: module
 
 module: $(MODULE_NAME).h $(SOURCE_FILES)
 	gcc -c $(SOURCE_FILES) $(STD) $(WARNINGS) $(C_FLAGS) $(INCLUDE_PATHS) $(LIBS_PATHS) $(LIBS) $(DEBUG) $(OPTIMIZA)
+	rm -f lib$(MODULE_NAME).a
 	ar -rcs lib$(MODULE_NAME).a *.o
 
 module_test: module $(MODULE_NAME)_test.c

@@ -8,7 +8,7 @@
 
 
 noreturn void showErrnoAndHalt(){
-    fprintf(stderr, "%s\n", strerror(errno));
+    fprintf(stderr, "errno %i: %s\n", errno, strerror(errno));
     assert(!errno);
     exit(errno);
 }

@@ -16,7 +16,7 @@
 ### Hardware specific
 
 - [Bank Switching](https://b13rg.github.io/Gameboy-Bank-Switching/)
-- [Opcodes](https://rednex.github.io/rgbds/gbz80.7.html#CP_A,r8)
+- [Opcodes](https://rednex.github.io/rgbds/gbz80.7.html)
 
 ### Software utilities
 

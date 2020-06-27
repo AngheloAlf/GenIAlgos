@@ -2,7 +2,7 @@
 
 
 size_t getRBankByPkId(size_t pkId, bool y_mode){
-    if(y_mode && pkId == 0x15){
+    if(!y_mode && pkId == 0x15){
         return 0x01;
     }
     if(pkId == 0xB6){
