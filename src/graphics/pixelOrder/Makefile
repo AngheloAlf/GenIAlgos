@@ -1,20 +1,19 @@
-MODULE_NAME  = picCompression
-SOURCE_FILES = decompressPicture.c
+MODULE_NAME  = pixelOrder
+SOURCE_FILES = rowToColumnOrder.c
 
 LIBS            = 
 LIBS_PATHS      = -L.
 INCLUDE_PATHS   = 
 
 TEST_LIBS           = -lio -lnumbers -lerrorHandling
-TEST_LIBS_PATHS     = -L../../../utils/io/ -L../../../utils/numbers/ -L../../../utils/errorHandling/
-TEST_INCLUDE_PATHS  = -I../../../
+TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/numbers/ -L../../utils/errorHandling/
+TEST_INCLUDE_PATHS  = -I../../
 
 STD         = -std=c11
 WARNINGS    = -Wall -Wextra -Wunused-macros -Wendif-labels
 C_FLAGS     = -fno-common -fPIC -rdynamic
 DEBUG       = -g
 OPTIMIZA    = -Og
-
 
 all: module
 
@@ -27,7 +26,6 @@ module_test: module $(MODULE_NAME)_test.c
 	gcc -o $(MODULE_NAME).elf $(MODULE_NAME)_test.c -l$(MODULE_NAME) $(STD) $(WARNINGS) $(C_FLAGS) $(INCLUDE_PATHS) $(TEST_INCLUDE_PATHS) $(LIBS_PATHS) $(TEST_LIBS_PATHS) $(LIBS) $(TEST_LIBS) $(DEBUG) $(OPTIMIZA)
 
 test_module: module_test
-
 
 clean:
 	rm -f *.o *.elf
