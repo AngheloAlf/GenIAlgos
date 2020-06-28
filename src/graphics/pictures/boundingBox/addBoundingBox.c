@@ -10,10 +10,10 @@ typedef struct{
 } Matrix8_t;
 
 
-static size_t calculate_offset(size_t width_in_tiles, size_t height_in_tiles, size_t bb_width, size_t bb_height, size_t bytes_per_tile){
-    size_t y = height_in_tiles - bb_height;
-    size_t x = (width_in_tiles - bb_width + 1)/2;
-    size_t offset = height_in_tiles * x + y;
+static uint8_t calculate_offset(uint8_t width_in_tiles, uint8_t height_in_tiles, uint8_t bb_width, uint8_t bb_height, uint8_t bytes_per_tile){
+    uint8_t y = height_in_tiles - bb_height;
+    uint8_t x = (width_in_tiles - bb_width + 1)/2;
+    uint8_t offset = height_in_tiles * x + y;
     return bytes_per_tile * offset;
 }
 
