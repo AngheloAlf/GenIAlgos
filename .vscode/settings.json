@@ -1,6 +1,6 @@
 {
     "files.watcherExclude": {
-        "**/tools/**": true
+        "**/external_tools/**": true
     },
     "files.associations": {
         "*.C": "c",

@@ -52,5 +52,8 @@ Mkfile.old
 dkms.conf
 
 
-tools/
+external_tools/
 *.bmp
+*.gb
+*.sav
+*.sgm
