@@ -1,4 +1,4 @@
-#include "pkStatsByDex.h"
+#include "stats.h"
 
 #include "utils/io/io.h"
 #include "utils/numbers/numbers.h"
@@ -70,11 +70,11 @@ int main(int argc, char **argv){
     readFile(data, file_size, filename, 0);
 
     PkSpeciesStats_t stats_entry;
-    load_pk_stats_by_dex_to_struct(&stats_entry, data, 0, dex_num);
+    pkStats_byDexToStruct(&stats_entry, data, 0, dex_num);
 
     printf("\n%03"PRIu8"\n", dex_num);
-    printf("entry_offset: 0x%08"PRIX16"\n", calculate_pk_stat_entry_offset(dex_num));
-    printf("entry_pos:    0x%08"PRIX32"\n", calculate_pk_stat_entry_offset(dex_num) + PKSTSBYID_STATS_ENTRY_BASE);
+    printf("entry_offset: 0x%08"PRIX16"\n", pkStats_calcEntryOffset(dex_num));
+    printf("entry_pos:    0x%08"PRIX32"\n", pkStats_calcEntryOffset(dex_num) + PKSTATS_STATS_ENTRY_BASE);
     show_pk_stats(&stats_entry);
 
     free(data);

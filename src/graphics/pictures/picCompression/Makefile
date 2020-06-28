@@ -15,10 +15,10 @@ C_FLAGS     = -fno-common -fPIC -rdynamic
 DEBUG       = -g
 OPTIMIZA    = -Og
 
-
 all: module
 
 module: $(MODULE_NAME).h $(SOURCE_FILES)
+	rm -f *.a
 	gcc -c $(SOURCE_FILES) $(STD) $(WARNINGS) $(C_FLAGS) $(INCLUDE_PATHS) $(LIBS_PATHS) $(LIBS) $(DEBUG) $(OPTIMIZA)
 	ar -rcs lib$(MODULE_NAME).a *.o
 
@@ -28,6 +28,5 @@ module_test: module $(MODULE_NAME)_test.c
 
 test_module: module_test
 
-
 clean:
-	rm -f *.o *.elf
+	rm -f *.o *.a *.elf

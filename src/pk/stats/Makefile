@@ -1,5 +1,5 @@
-MODULE_NAME = pkStatsByDex
-SOURCE_FILES = pkStatsByDex.c
+MODULE_NAME  = stats
+SOURCE_FILES = baseStats.c
 
 LIBS            = 
 LIBS_PATHS      = -L.
@@ -10,15 +10,15 @@ TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/numbers/ -L../../utils/err
 TEST_INCLUDE_PATHS  = -I../../
 
 STD         = -std=c11
-WARNINGS    = -Wall -Wextra
-C_FLAGS     = -fno-common -fPIC
+WARNINGS    = -Wall -Wextra -Wunused-macros -Wendif-labels
+C_FLAGS     = -fno-common -fPIC -rdynamic
 DEBUG       = -g
 OPTIMIZA    = -Og
-
 
 all: module
 
 module: $(MODULE_NAME).h $(SOURCE_FILES)
+	rm -f *.a
 	gcc -c $(SOURCE_FILES) $(STD) $(WARNINGS) $(C_FLAGS) $(INCLUDE_PATHS) $(LIBS_PATHS) $(LIBS) $(DEBUG) $(OPTIMIZA)
 	ar -rcs lib$(MODULE_NAME).a *.o
 
@@ -28,6 +28,5 @@ module_test: module $(MODULE_NAME)_test.c
 
 test_module: module_test
 
-
 clean:
-	rm -f *.o *.elf
+	rm -f *.o *.a *.elf

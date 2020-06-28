@@ -1,13 +1,13 @@
 #pragma once
-#ifndef POINTERS_PKSPECIESSTATS_PKSTATSBYDEX_H
-#define POINTERS_PKSPECIESSTATS_PKSTATSBYDEX_H
+#ifndef PK_STATS_H
+#define PK_STATS_H
 
 #include <stddef.h>
 #include <stdint.h>
 
 
-#define PKSTSBYID_STATS_ENTRY_BASE  0x383DE
-#define PKSTSBYID_STATS_ENTRY_LEN   0x1C
+#define PKSTATS_STATS_ENTRY_BASE  0x383DE
+#define PKSTATS_STATS_ENTRY_LEN   0x1C
 
 typedef enum{
     PkType_Normal = 0x00,
@@ -86,9 +86,8 @@ typedef struct{
 } PkSpeciesStats_t;
 
 
-uint16_t calculate_pk_stat_entry_offset(uint8_t dex_number);
-void load_pk_stats_by_dex_to_arr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
-void load_pk_stats_by_dex_to_struct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
+uint16_t pkStats_calcEntryOffset(uint8_t dex_number);
+void pkStats_byDexToArr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
+void pkStats_byDexToStruct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
 
-
-#endif /* POINTERS_PKSPECIESSTATS_PKSTATSBYDEX_H */
+#endif /* PK_STATS_H */
