@@ -6,7 +6,8 @@
 #include <stdint.h>
 
 #define BANK_SIZE                       0x4000
-#define ABSOLUTE_PTR(_bank, _rel_ptr)   ((_bank-1)*BANK_SIZE + _rel_ptr)
+#define _ABSOLUTE_PTR(_bank, _rel_ptr)  (( (uint8_t)((_bank)-1) )*BANK_SIZE + (_rel_ptr))
+#define ABSOLUTE_PTR(_bank, _rel_ptr)   ((_rel_ptr) < BANK_SIZE ? (_rel_ptr) : _ABSOLUTE_PTR(_bank, _rel_ptr))
 
 #define END_OF_DATA         0x50
 
