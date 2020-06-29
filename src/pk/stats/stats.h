@@ -2,9 +2,7 @@
 #ifndef PK_STATS_H
 #define PK_STATS_H
 
-#include <stddef.h>
-#include <stdint.h>
-
+#include "common/externalHeaders/externalHeaders.h"
 
 #define PKSTATS_STATS_ENTRY_BASE  0x383DE
 #define PKSTATS_STATS_ENTRY_LEN   0x1C
@@ -84,7 +82,6 @@ typedef struct{
     uint8_t growthRate;
     TmHmFlags_t tmHmFlags;
 } PkSpeciesStats_t;
-
 
 uint16_t pkStats_calcEntryOffset(uint8_t dex_number);
 void pkStats_byDexToArr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);

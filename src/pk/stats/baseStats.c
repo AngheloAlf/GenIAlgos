@@ -1,13 +1,12 @@
 #include "stats.h"
 
-
 uint16_t pkStats_calcEntryOffset(uint8_t dex_number){
     --dex_number;
     return dex_number*PKSTATS_STATS_ENTRY_LEN;
 }
 
 void pkStats_byDexToArr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex){
-    uint16_t entry_offset = calculate_pk_stat_entry_offset(pkDex);
+    uint16_t entry_offset = pkStats_calcEntryOffset(pkDex);
     for(size_t i = 0; i < PKSTATS_STATS_ENTRY_LEN; ++i){
         dst_arr[i] = src_data[PKSTATS_STATS_ENTRY_BASE + entry_offset + src_data_offset + i];
     }
@@ -15,7 +14,7 @@ void pkStats_byDexToArr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_d
 
 void pkStats_byDexToStruct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex){
     uint8_t aux_arr[PKSTATS_STATS_ENTRY_LEN];
-    load_pk_stats_by_dex_to_arr(aux_arr, src_data, src_data_offset, pkDex);
+    pkStats_byDexToArr(aux_arr, src_data, src_data_offset, pkDex);
 
     dst_stru->dexId = aux_arr[0x00];
 

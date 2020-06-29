@@ -1,6 +1,5 @@
 #include "toAscii.h"
 
-
 const char *charAsAsciiStr(uint8_t character){
     switch(character){
     case 0x00: /* ?? */

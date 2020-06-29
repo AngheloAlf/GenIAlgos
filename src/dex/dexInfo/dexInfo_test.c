@@ -2,13 +2,11 @@
 
 #include "utils/io/io.h"
 #include "utils/numbers/numbers.h"
+#include "utils/text/text.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
 
-
-#define UNDERLINE(_text) "\e[4m"_text"\e[0m"
 
 void check_arguments(int argc, char **argv){
     if(argc < 3){

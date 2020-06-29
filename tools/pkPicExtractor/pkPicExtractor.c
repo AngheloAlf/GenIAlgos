@@ -1,7 +1,10 @@
+#include "common/externalHeaders/externalHeaders.h"
+#include "common/ptrs/ptrs.h"
+
 #include "dex/dexNumbers/dexNumbers.h"
-#include "pointers/pkSpeciesStats/pkStatsByDex.h"
 #include "graphics/pictures/bankSwitch/bankSwitch.h"
 #include "dex/dexInfo/dexInfo.h"
+#include "pk/stats/stats.h"
 #include "graphics/pictures/picCompression/picCompression.h"
 #include "graphics/pictures/boundingBox/boundingBox.h"
 #include "graphics/bitplanes/bitplanes.h"
@@ -37,7 +40,7 @@ int main(int argc, char **argv){
     uint8_t dex_num = dexNumById(rom, 0, pk_id);
     printf("dex_num: 0x%02"PRIX8"\n", dex_num);
     PkSpeciesStats_t specie_data;
-    load_pk_stats_by_dex_to_struct(&specie_data, rom, 0, dex_num);
+    pkStats_byDexToStruct(&specie_data, rom, 0, dex_num);
     size_t bank = getRBankByPkId(pk_id, false);
     printf("bank: 0x%zu\n", bank);
 
@@ -47,8 +50,8 @@ int main(int argc, char **argv){
     uint8_t *buffer2 = &buffer[2*BUFFER_SIZE];
 
     printf("frontSpritePtr: 0x%04"PRIX16"\n", specie_data.spritePtrs.frontSpritePtr);
-    printf("absolute_ptr: 0x%zx\n", ABSOLUTE_PTR(bank, specie_data.spritePtrs.frontSpritePtr));
-    decompressPicture(BUFFER_SIZE, buffer1, buffer2, specie_data.spritePtrs.backSpritePtr-specie_data.spritePtrs.frontSpritePtr, &rom[ABSOLUTE_PTR(bank, specie_data.spritePtrs.frontSpritePtr)]);
+    printf("absolutePtr: 0x%"PRIX32"\n", absolutePtr(bank, specie_data.spritePtrs.frontSpritePtr));
+    decompressPicture(BUFFER_SIZE, buffer1, buffer2, &rom[absolutePtr(bank, specie_data.spritePtrs.frontSpritePtr)]);
 
     free(rom);
 

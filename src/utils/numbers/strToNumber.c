@@ -5,11 +5,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <inttypes.h>
 #include <ctype.h>
 #include <errno.h>
 #include <assert.h>
-
 
 uintmax_t strToNumber(const char *str_val){
     if(isdigit(str_val[0]) == 0){

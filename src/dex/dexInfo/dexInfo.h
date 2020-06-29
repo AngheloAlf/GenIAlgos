@@ -2,18 +2,16 @@
 #ifndef DEX_DEXINFO_H
 #define DEX_DEXINFO_H
 
-#include <stddef.h>
-#include <stdint.h>
+#include "common/externalHeaders/externalHeaders.h"
+#include "common/ptrs/ptrs.h"
 
 #define BANK_SIZE                       0x4000
-#define _ABSOLUTE_PTR(_bank, _rel_ptr)  (( (uint8_t)((_bank)-1) )*BANK_SIZE + (_rel_ptr))
-#define ABSOLUTE_PTR(_bank, _rel_ptr)   ((_rel_ptr) < BANK_SIZE ? (_rel_ptr) : _ABSOLUTE_PTR(_bank, _rel_ptr))
 
 #define END_OF_DATA         0x50
 
 #define DEXINFO_INFOS_PTR       0x447E
 #define DEXINFO_INFOS_PTR_BANK  0x10
-#define DEXINFO_INFOS_PTR_ABSO  ABSOLUTE_PTR(DEXINFO_INFOS_PTR_BANK, DEXINFO_INFOS_PTR)
+#define DEXINFO_INFOS_PTR_ABSO  absolutePtr(DEXINFO_INFOS_PTR_BANK, DEXINFO_INFOS_PTR)
 
 typedef struct{
     uint8_t feet;
@@ -24,7 +22,6 @@ typedef struct{
     uint8_t dexEntryBank;
     uint8_t endOfData;
 } DexInfos_t;
-
 
 uint16_t getDexInfosPtrById(uint8_t *dst_bank_id, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkId);
 

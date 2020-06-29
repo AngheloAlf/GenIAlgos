@@ -1,8 +1,8 @@
 MODULE_NAME  = pkPicExtractor
 SOURCE_FILES = pkPicExtractor.c
 
-LIBS            = -lio -lnumbers -lbmp -lerrorHandling -ldexNumbers -lpkStatsByDex -lbankSwitch -ldexInfo -lpicCompression -lboundingBox -lbitplanes -lpixelOrder
-LIBS_PATHS      = -L. -L../../src/utils/io/ -L../../src/utils/numbers/ -L../../src/utils/image/bmp/ -L../../src/utils/errorHandling/ -L../../src/dex/dexNumbers/ -L../../src/pointers/pkSpeciesStats/ -L../../src/graphics/pictures/bankSwitch/ -L../../src/dex/dexInfo/ -L../../src/graphics/pictures/picCompression/ -L../../src/graphics/pictures/boundingBox/ -L../../src/graphics/bitplanes/ -L../../src/graphics/pixelOrder/
+LIBS            = -lptrs -lio -lnumbers -lbmp -lerrorHandling -ldexNumbers -lstats -lbankSwitch -ldexInfo -lpicCompression -lboundingBox -lbitplanes -lpixelOrder
+LIBS_PATHS      = -L. -L../../src/common/ptrs/ -L../../src/utils/io/ -L../../src/utils/numbers/ -L../../src/utils/image/bmp/ -L../../src/utils/errorHandling/ -L../../src/dex/dexNumbers/ -L../../src/pk/stats/ -L../../src/graphics/pictures/bankSwitch/ -L../../src/dex/dexInfo/ -L../../src/graphics/pictures/picCompression/ -L../../src/graphics/pictures/boundingBox/ -L../../src/graphics/bitplanes/ -L../../src/graphics/pixelOrder/
 INCLUDE_PATHS   = -I../../src/
 
 STD         = -std=c11

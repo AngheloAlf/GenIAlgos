@@ -1,27 +1,8 @@
 #include "picCompression.h"
 
-#include <stdbool.h>
+#include "common/dataStructures/dataStructures.h"
+
 #include <string.h>
-
-
-typedef struct{
-    size_t size;
-    uint8_t *arr;
-} Array8_t;
-
-typedef struct{
-    size_t size;
-    uint8_t *arr;
-    size_t width, height;
-} Matrix8_t;
-
-typedef struct{
-    Array8_t bytes_arr;
-    uint16_t byte_index;
-    uint8_t bit_index;
-    uint8_t actual_byte;
-} BitIterator_t;
-
 
 static const uint16_t rle_table[] = {
     0x0001, 0x0003, 0x0007, 0x000f,
@@ -72,7 +53,7 @@ uint8_t get_bit_group(uint8_t bit_group_id, uint8_t a){
 }
 
 uint8_t get_next_byte(BitIterator_t *bit_iterator){
-    uint8_t byte = bit_iterator->bytes_arr.arr[bit_iterator->byte_index];
+    uint8_t byte = bit_iterator->bytes_arr[bit_iterator->byte_index];
     bit_iterator->byte_index += 1;
     return byte;
 }
@@ -221,7 +202,7 @@ void decompress_rutine(Matrix8_t *buffer_1, Matrix8_t *buffer_2, BitIterator_t *
     interpret(buffer_1, buffer_2, mirror, interpret_mode, !use_second_buffer);
 }
 
-void decompressPicture(size_t dst_size, uint8_t *dst_buffer0, uint8_t *dst_buffer1, size_t compressed_size, uint8_t *compressed_arr){
+void decompressPicture(size_t dst_size, uint8_t dst_buffer0[dst_size], uint8_t dst_buffer1[dst_size], uint8_t *compressed_arr){
     uint8_t dimensions = compressed_arr[0];
     uint8_t heightPixels = 8*(dimensions & 0x0F);
     uint8_t widthPixels = SWAP(dimensions) & 0x0F;
@@ -239,10 +220,7 @@ void decompressPicture(size_t dst_size, uint8_t *dst_buffer0, uint8_t *dst_buffe
         .height = heightPixels
     };
     BitIterator_t compressed = {
-        .bytes_arr = {
-            .size = compressed_size-1,
-            .arr = &compressed_arr[1]
-        },
+        .bytes_arr = &compressed_arr[1],
         .byte_index = 0,
         .bit_index = 0,
         .actual_byte = 0

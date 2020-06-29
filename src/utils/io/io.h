@@ -2,10 +2,9 @@
 #ifndef UTILS_IO_H
 #define UTILS_IO_H
 
-#include <stddef.h>
-#include <stdint.h>
-#include <stdio.h>
+#include "common/externalHeaders/externalHeaders.h"
 
+#include <stdio.h>
 
 size_t getFileSize(const char *filename);
 size_t fgetFileSize(FILE *fp);

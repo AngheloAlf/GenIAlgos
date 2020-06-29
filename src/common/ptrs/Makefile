@@ -1,12 +1,12 @@
-MODULE_NAME     = io
-SOURCE_FILES    = getFileSize.c readFile.c writeFile.c
+MODULE_NAME  = ptrs
+SOURCE_FILES = absolutePtr.c
 
-LIBS            = -lerrorHandling
-LIBS_PATHS      = -L. -L../../utils/errorHandling/
+LIBS            = 
+LIBS_PATHS      = -L.
 INCLUDE_PATHS   = -I../../
 
-TEST_LIBS           = -lio -lnumbers
-TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/numbers/
+TEST_LIBS           = 
+TEST_LIBS_PATHS     = 
 TEST_INCLUDE_PATHS  = 
 
 STD         = -std=c11

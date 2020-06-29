@@ -1,9 +1,8 @@
 #include "dexInfo.h"
 
-
 /// Includes delimiters.
 size_t getEntriesLenByPtr(const uint8_t *src_data, int64_t src_data_offset, uint8_t bank, uint16_t entries_ptr){
-    uint32_t ptr = ABSOLUTE_PTR(bank, entries_ptr);
+    uint32_t ptr = absolutePtr(bank, entries_ptr);
     size_t len = 0;
     uint8_t val = 0;
     do{
@@ -19,7 +18,7 @@ size_t getEntriesLenById(const uint8_t *src_data, int64_t src_data_offset, uint8
 
 void getEntriesByPtr_toArr(size_t *dst_first_entry_len, uint8_t *dst_entries, const uint8_t *src_data, int64_t src_data_offset, uint8_t bank, uint16_t entries_ptr){
     size_t len = getEntriesLenByPtr(src_data, src_data_offset, bank, entries_ptr);
-    uint32_t ptr = ABSOLUTE_PTR(bank, entries_ptr);
+    uint32_t ptr = absolutePtr(bank, entries_ptr);
     for(size_t i = 0; i < len; ++i){
         dst_entries[i] = src_data[ptr + src_data_offset + i];
         if(dst_entries[i] == 0x49){

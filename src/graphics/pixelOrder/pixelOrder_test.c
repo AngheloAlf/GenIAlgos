@@ -1,11 +1,10 @@
 #include "pixelOrder.h"
 
 #include "utils/io/io.h"
+#include "utils/text/text.h"
 
 #include <stdlib.h>
 
-
-#define UNDERLINE(_text) "\e[4m"_text"\e[0m"
 void check_arguments(int argc, char **argv){
     if(argc < 3){
         printf("Usage: %s %s %s\n", argv[0], UNDERLINE("sprite_in_row_order_file"), UNDERLINE("out_name"));

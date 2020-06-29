@@ -1,14 +1,8 @@
 #include "boundingBox.h"
 
-#include <inttypes.h>
+#include "common/dataStructures/dataStructures.h"
+
 #include <assert.h>
-
-typedef struct{
-    size_t size;
-    uint8_t *arr;
-    size_t width, height;
-} Matrix8_t;
-
 
 static uint8_t calculate_offset(uint8_t width_in_tiles, uint8_t height_in_tiles, uint8_t bb_width, uint8_t bb_height, uint8_t bytes_per_tile){
     uint8_t y = height_in_tiles - bb_height;

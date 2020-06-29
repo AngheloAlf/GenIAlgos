@@ -4,7 +4,6 @@
 
 #include <assert.h>
 
-
 size_t getFileSize(const char *filename){
     int retval;
 

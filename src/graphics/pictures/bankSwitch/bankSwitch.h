@@ -2,10 +2,7 @@
 #ifndef GRAPHICS_PICTURES_BANKSWITCH_H
 #define GRAPHICS_PICTURES_BANKSWITCH_H
 
-#include <stddef.h>
-#include <stdint.h>
-#include <stdbool.h>
-
+#include "common/externalHeaders/externalHeaders.h"
 
 size_t getRBankByPkId(size_t pkId, bool y_mode);
 

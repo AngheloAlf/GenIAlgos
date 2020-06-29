@@ -1,11 +1,10 @@
 #include "boundingBox.h"
 
 #include "utils/io/io.h"
+#include "utils/text/text.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <inttypes.h>
-
 
 #define BYTES_PER_TILE  8
 #define WIDTH_IN_TILES  7
@@ -13,16 +12,12 @@
 
 #define BUFF_SIZE       WIDTH_IN_TILES*HEIGHT_IN_TILES*BYTES_PER_TILE
 
-
-#define UNDERLINE(_text) "\e[4m"_text"\e[0m"
-
 void check_arguments(int argc, char **argv){
     if(argc < 2){
         printf("Usage: %s %s\n", argv[0], UNDERLINE("sprite_file"));
         exit(-1);
     }
 }
-
 
 int main(int argc, char **argv){
     check_arguments(argc, argv);

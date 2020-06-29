@@ -1,15 +1,13 @@
 #include "picCompression.h"
 
+#include "utils/io/io.h"
+#include "utils/text/text.h"
+
 #include <stdlib.h>
 #include <assert.h>
 
-#include "utils/io/io.h"
-
-
 #define BUFFER_SIZE             0x188
 
-
-#define UNDERLINE(_text) "\e[4m"_text"\e[0m"
 void check_arguments(int argc, char **argv){
     if(argc < 2){
         printf("Usage: %s %s\n", argv[0], UNDERLINE("compressed_sprite_file"));
@@ -27,7 +25,7 @@ int main(int argc, char **argv){
     readFile(compressed, size, filename, 0);
 
     uint8_t buffer[2*BUFFER_SIZE];
-    decompressPicture(BUFFER_SIZE, buffer, &buffer[BUFFER_SIZE], size, compressed);
+    decompressPicture(BUFFER_SIZE, buffer, &buffer[BUFFER_SIZE], compressed);
 
     writeFile(buffer, 2*BUFFER_SIZE, "buffer_dump.bin", 0);
 

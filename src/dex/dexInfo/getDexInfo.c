@@ -1,8 +1,7 @@
 #include "dexInfo.h"
 
-
 void getDexInfoByPtr_toArr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t bank, uint16_t infos_ptr){
-    uint32_t ptr = ABSOLUTE_PTR(bank, infos_ptr);
+    uint32_t ptr = absolutePtr(bank, infos_ptr);
     size_t len = getSpiciesNameLenByPtr(src_data, src_data_offset, bank, infos_ptr);
 
     for(size_t i = 0; i < 0x09; ++i){
