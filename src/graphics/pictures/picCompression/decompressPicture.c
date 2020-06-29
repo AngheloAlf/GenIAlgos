@@ -202,7 +202,7 @@ void decompress_rutine(Matrix8_t *buffer_1, Matrix8_t *buffer_2, BitIterator_t *
     interpret(buffer_1, buffer_2, mirror, interpret_mode, !use_second_buffer);
 }
 
-void decompressPicture(size_t dst_size, uint8_t dst_buffer0[dst_size], uint8_t dst_buffer1[dst_size], uint8_t *compressed_arr){
+void decompressPicture(size_t dst_size, uint8_t dst_buffer0[dst_size], uint8_t dst_buffer1[dst_size], const uint8_t *compressed_arr){
     uint8_t dimensions = compressed_arr[0];
     uint8_t heightPixels = 8*(dimensions & 0x0F);
     uint8_t widthPixels = SWAP(dimensions) & 0x0F;
@@ -220,7 +220,7 @@ void decompressPicture(size_t dst_size, uint8_t dst_buffer0[dst_size], uint8_t d
         .height = heightPixels
     };
     BitIterator_t compressed = {
-        .bytes_arr = &compressed_arr[1],
+        .bytes_arr = (uint8_t *)&compressed_arr[1],
         .byte_index = 0,
         .bit_index = 0,
         .actual_byte = 0

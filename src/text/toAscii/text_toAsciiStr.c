@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-void text_toAsciiStr(char *dst_buff, size_t src_size, const uint8_t src_buff[src_size]){
+size_t text_toAsciiStr(char *dst_buff, size_t src_size, const uint8_t src_buff[src_size]){
     size_t dst_i = 0;
     for(size_t i = 0; i < src_size; ++i){
         if(src_buff[i] == TEXT_END){
@@ -14,4 +14,5 @@ void text_toAsciiStr(char *dst_buff, size_t src_size, const uint8_t src_buff[src
         dst_i += chr_len;
     }
     dst_buff[dst_i] = 0;
+    return dst_i;
 }

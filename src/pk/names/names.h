@@ -10,6 +10,7 @@
 
 #define PKNAMES_NAME_LEN            0x0A
 
-void pkNames_getNameById(uint8_t dst_buff[PKNAMES_NAME_LEN], const uint8_t *src_data, int64_t src_data_offset, uint8_t pk_id);
+uint32_t pkNames_namesPtr(const uint8_t *src_data, int64_t src_data_offset);
+void pkNames_getNameById(uint8_t dst_buff[PKNAMES_NAME_LEN], const uint8_t *src_data, int64_t src_data_offset, uint32_t names_ptr, uint8_t pk_id);
 
 #endif /* PK_NAMES_H */
