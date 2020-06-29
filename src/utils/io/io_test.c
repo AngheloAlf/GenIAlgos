@@ -14,11 +14,7 @@ void check_arguments(int argc, char **argv){
     }
 }
 
-int main(int argc, char **argv){
-    check_arguments(argc, argv);
-    const char *filename = argv[1];
-    size_t bank_size = strToNumber(argv[2]);
-
+void split_into_banks(const char *filename, size_t bank_size){
     int64_t file_size = getFileSize(filename);
     uint8_t *data = malloc(file_size*sizeof(uint8_t));
     readFile(data, file_size, filename, 0);
@@ -41,6 +37,35 @@ int main(int argc, char **argv){
 
     free(new_name);
     free(data);
+}
+
+void check_arguments2(int argc, char **argv){
+    if(argc < 4){
+        printf("Usage: %s %s %s %s\n", argv[0], UNDERLINE("file"), UNDERLINE("value"), UNDERLINE("out name"));
+        exit(-1);
+    }
+}
+
+void substract_to_each_byte(const char *filename, uint8_t value, const char *out){
+    size_t file_size = getFileSize(filename);
+    uint8_t *data = malloc(file_size*sizeof(uint8_t));
+    readFile(data, file_size, filename, 0);
+
+    for(size_t i = 0; i < file_size; ++i){
+        data[i] -= value;
+    }
+
+    writeFile(data, file_size, out, 0);
+
+    free(data);
+}
+
+int main(int argc, char **argv){
+    // check_arguments(argc, argv);
+    // split_into_banks(argv[1], strToNumber(argv[2]));
+
+    check_arguments2(argc, argv);
+    substract_to_each_byte(argv[1], strToNumber(argv[2]), argv[3]);
 
     return 0;
 }

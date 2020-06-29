@@ -1,12 +1,12 @@
-MODULE_NAME  = toAscii
-SOURCE_FILES = charAsAsciiStr.c len.c text_toAsciiStr.c
+MODULE_NAME  = names
+SOURCE_FILES = getName.c
 
-LIBS            = -lptrs
-LIBS_PATHS      = -L. -L../../common/ptrs/
+LIBS            = 
+LIBS_PATHS      = -L.
 INCLUDE_PATHS   = -I../../
 
-TEST_LIBS           = -lio -lerrorHandling -lnumbers -ldexInfo
-TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/errorHandling/ -L../../utils/numbers/ -L../../dex/dexInfo/
+TEST_LIBS           = -lio -lnumbers -lerrorHandling
+TEST_LIBS_PATHS     = -L../../utils/io/ -L../../utils/numbers/ -L../../utils/errorHandling/
 TEST_INCLUDE_PATHS  = 
 
 STD         = -std=c11
