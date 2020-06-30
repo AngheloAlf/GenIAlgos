@@ -1,8 +1,8 @@
 MODULE_NAME  = stats
 SOURCE_FILES = baseStats.c
 
-LIBS            = 
-LIBS_PATHS      = -L.
+LIBS            = -lptrs
+LIBS_PATHS      = -L. -L../../common/ptrs/
 INCLUDE_PATHS   = -I../../
 
 TEST_LIBS           = -lio -lnumbers -lerrorHandling

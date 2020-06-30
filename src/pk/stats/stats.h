@@ -4,7 +4,14 @@
 
 #include "common/externalHeaders/externalHeaders.h"
 
-#define PKSTATS_STATS_ENTRY_BASE  0x383DE
+#define PKSTATS_PTR_TO_BANKNO               0x153B
+#define PKSTATS_PTR_TO_STATSPTR_LOW         0x1578
+#define PKSTATS_PTR_TO_STATSPTR_HIGH        0x1579
+
+#define PKSTATS_PTR_TO_BANKNO_151           0x159C
+#define PKSTATS_PTR_TO_STATSPTR_151_LOW     0x1593
+#define PKSTATS_PTR_TO_STATSPTR_151_HIGH    0x1594
+
 #define PKSTATS_STATS_ENTRY_LEN   0x1C
 
 typedef enum{
@@ -83,8 +90,11 @@ typedef struct{
     TmHmFlags_t tmHmFlags;
 } PkSpeciesStats_t;
 
-uint16_t pkStats_calcEntryOffset(uint8_t dex_number);
-void pkStats_byDexToArr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
-void pkStats_byDexToStruct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex);
+
+uint32_t pkStats_ptr(const uint8_t *srcbuff, uint8_t dex_number);
+
+void pkStats_byPtrToArr(uint8_t *dstbuff, const uint8_t *srcbuff, uint32_t ptr);
+void pkStats_byDexToArr(uint8_t *dstbuff, const uint8_t *srcbuff, uint8_t dex_number);
+void pkStats_byDexToStruct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, uint8_t dex_number);
 
 #endif /* PK_STATS_H */

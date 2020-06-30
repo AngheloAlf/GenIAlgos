@@ -66,11 +66,10 @@ int main(int argc, char **argv){
     readFile(data, file_size, filename, 0);
 
     PkSpeciesStats_t stats_entry;
-    pkStats_byDexToStruct(&stats_entry, data, 0, dex_num);
+    pkStats_byDexToStruct(&stats_entry, data, dex_num, false);
 
     printf("\n%03"PRIu8"\n", dex_num);
-    printf("entry_offset: 0x%08"PRIX16"\n", pkStats_calcEntryOffset(dex_num));
-    printf("entry_pos:    0x%08"PRIX32"\n", pkStats_calcEntryOffset(dex_num) + PKSTATS_STATS_ENTRY_BASE);
+    printf("entry_pos:    0x%08"PRIX32"\n", pkStats_ptr(data, dex_num, false));
     show_pk_stats(&stats_entry);
 
     free(data);

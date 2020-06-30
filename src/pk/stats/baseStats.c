@@ -1,20 +1,35 @@
 #include "stats.h"
 
-uint16_t pkStats_calcEntryOffset(uint8_t dex_number){
+#include "common/ptrs/ptrs.h"
+
+uint32_t pkStats_ptr(const uint8_t *srcbuff, uint8_t dex_number){
+    uint8_t bank;
+    uint16_t ptr;
+    if(dex_number == 151){
+        bank = srcbuff[PKSTATS_PTR_TO_BANKNO_151];
+        ptr = ptrs_fetch16(srcbuff, PKSTATS_PTR_TO_STATSPTR_151_HIGH, PKSTATS_PTR_TO_STATSPTR_151_LOW);
+        return absolutePtr(bank, ptr);
+    }
     --dex_number;
-    return dex_number*PKSTATS_STATS_ENTRY_LEN;
+    bank = srcbuff[PKSTATS_PTR_TO_BANKNO];
+    ptr = ptrs_fetch16(srcbuff, PKSTATS_PTR_TO_STATSPTR_HIGH, PKSTATS_PTR_TO_STATSPTR_LOW);
+    return absolutePtr(bank, ptr) + dex_number*PKSTATS_STATS_ENTRY_LEN;
 }
 
-void pkStats_byDexToArr(uint8_t *dst_arr, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex){
-    uint16_t entry_offset = pkStats_calcEntryOffset(pkDex);
+void pkStats_byPtrToArr(uint8_t *dstbuff, const uint8_t *srcbuff, uint32_t ptr){
     for(size_t i = 0; i < PKSTATS_STATS_ENTRY_LEN; ++i){
-        dst_arr[i] = src_data[PKSTATS_STATS_ENTRY_BASE + entry_offset + src_data_offset + i];
+        dstbuff[i] = srcbuff[ptr + i];
     }
 }
 
-void pkStats_byDexToStruct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, int64_t src_data_offset, uint8_t pkDex){
+void pkStats_byDexToArr(uint8_t *dstbuff, const uint8_t *srcbuff, uint8_t dex_number){
+    uint32_t ptr = pkStats_ptr(srcbuff, dex_number);
+    pkStats_byPtrToArr(dstbuff, srcbuff, ptr);
+}
+
+void pkStats_byDexToStruct(PkSpeciesStats_t *dst_stru, const uint8_t *src_data, uint8_t dex_number){
     uint8_t aux_arr[PKSTATS_STATS_ENTRY_LEN];
-    pkStats_byDexToArr(aux_arr, src_data, src_data_offset, pkDex);
+    pkStats_byDexToArr(aux_arr, src_data, dex_number);
 
     dst_stru->dexId = aux_arr[0x00];
 

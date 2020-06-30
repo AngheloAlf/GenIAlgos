@@ -55,5 +55,6 @@ dkms.conf
 external_tools/
 *.bmp
 *.gb
+*.gbc
 *.sav
 *.sgm

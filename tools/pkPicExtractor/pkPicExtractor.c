@@ -27,6 +27,7 @@ void check_arguments(int argc, char **argv){
 }
 
 #define BUFFER_SIZE     0x188
+#define Y_MODE          false
 
 void get_pk_name(size_t n, char dst_name[n], const uint8_t *rom, uint8_t pk_id){
     uint8_t pk_name[PKNAMES_NAME_LEN];
@@ -45,11 +46,13 @@ void make_outfile_name(size_t n, char dst_name[n], uint8_t pk_id, uint8_t dex_nu
 }
 
 void get_pic_ptrs(uint8_t *dimFront, uint32_t *frontPtr, uint32_t *backPtr, const uint8_t *rom, uint8_t pk_id, uint8_t dex_num){
+    printf("stats_ptr: 0x%04"PRIX32"\n", pkStats_ptr(rom, dex_num));
+    
     PkSpeciesStats_t specie_data;
-    pkStats_byDexToStruct(&specie_data, rom, 0, dex_num);
+    pkStats_byDexToStruct(&specie_data, rom, dex_num);
     *dimFront = specie_data.spritePtrs.dimFrontSprite;
 
-    size_t bank = getRBankByPkId(pk_id, false);
+    size_t bank = getRBankByPkId(pk_id, Y_MODE);
     printf("bank: 0x%zu\n", bank);
 
     printf("frontSpritePtr: 0x%04"PRIX16"\n", specie_data.spritePtrs.frontSpritePtr);
@@ -99,6 +102,9 @@ void extract_pic(const uint8_t *rom, uint8_t pk_id){
     char back_name[1024+1];
     make_outfile_name(1024, back_name, pk_id, dex_num, pk_name, "back");
 
+    const uint32_t colors[4] = {3*(0xFFFFFF/3), 2*(0xFFFFFF/3), 1*(0xFFFFFF/3), 0};
+    //const uint32_t colors[4] = {0xFFFFFF, 0x1E1611*8, 0x100E13*8, 0};
+
     uint8_t dimFront;
     uint32_t frontPtr, backPtr;
     get_pic_ptrs(&dimFront, &frontPtr, &backPtr, rom, pk_id, dex_num);
@@ -107,16 +113,15 @@ void extract_pic(const uint8_t *rom, uint8_t pk_id){
     printf("backPtr:        0x%"PRIX32"\n", backPtr);
 
     uint8_t front[2*BUFFER_SIZE];
-    uint8_t back[2*BUFFER_SIZE];
     extract_picture(front, &rom[frontPtr], dimFront, tiles_per_row, tiles_per_column, bytes_per_tile, bits_per_pixel);
-    extract_picture(back, &rom[backPtr], 0x44, tiles_per_row, tiles_per_column, bytes_per_tile, bits_per_pixel);
-
-    const uint32_t colors[4] = {3*(0xFFFFFF/3), 2*(0xFFFFFF/3), 1*(0xFFFFFF/3), 0};
-    //const uint32_t colors[4] = {0xFFFFFF, 0x1E1611*8, 0x100E13*8, 0};
     printf("front image: %s\n", front_name);
     make_image(front_name, front, colors, tiles_per_row, tiles_per_column, bytes_per_tile, bits_per_pixel);
+
+    uint8_t back[2*BUFFER_SIZE];
+    extract_picture(back, &rom[backPtr], 0x44, tiles_per_row, tiles_per_column, bytes_per_tile, bits_per_pixel);
     printf("back image: %s\n", back_name);
     make_image(back_name, back, colors, tiles_per_row, tiles_per_column, bytes_per_tile, bits_per_pixel);
+
     printf("\n");
 }
 
@@ -131,6 +136,10 @@ int main(int argc, char **argv){
     uint8_t pk_id = strToNumber(argv[2]);
 
     extract_pic(rom, pk_id);
+
+    /*for(size_t pk_id = 0; pk_id < 190+1; ++pk_id){
+        extract_pic(rom, pk_id);
+    }*/
 
     free(rom);
     return 0;

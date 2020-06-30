@@ -1,5 +1,5 @@
 MODULE_NAME  = ptrs
-SOURCE_FILES = absolutePtr.c
+SOURCE_FILES = absolutePtr.c fetch16.c
 
 LIBS            = 
 LIBS_PATHS      = -L.
