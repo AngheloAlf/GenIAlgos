@@ -68,7 +68,7 @@ void extract_picture(uint8_t dst_buffer[2*BUFFER_SIZE], const uint8_t *picture_b
     uint8_t *buffer1 = &buffer[1*BUFFER_SIZE];
     uint8_t *buffer2 = &buffer[2*BUFFER_SIZE];
 
-    decompressPicture(BUFFER_SIZE, buffer1, buffer2, picture_buff);
+    picComp_decompressPicture(BUFFER_SIZE, buffer1, buffer2, picture_buff);
 
     addBoundingBox(BUFFER_SIZE, buffer0, buffer1, buffer2, bounding_box_size, tiles_per_row, tiles_per_column, bytes_per_tile);
     mergeBitplanes(2*BUFFER_SIZE, buffer1);
@@ -102,8 +102,8 @@ void extract_pic(const uint8_t *rom, uint8_t pk_id){
     char back_name[1024+1];
     make_outfile_name(1024, back_name, pk_id, dex_num, pk_name, "back");
 
-    const uint32_t colors[4] = {3*(0xFFFFFF/3), 2*(0xFFFFFF/3), 1*(0xFFFFFF/3), 0};
-    //const uint32_t colors[4] = {0xFFFFFF, 0x1E1611*8, 0x100E13*8, 0};
+    //const uint32_t colors[4] = {3*(0xFFFFFF/3), 2*(0xFFFFFF/3), 1*(0xFFFFFF/3), 0};
+    const uint32_t colors[4] = {0xFFFFFF, 0x1E1611*8, 0x100E13*8, 0};
 
     uint8_t dimFront;
     uint32_t frontPtr, backPtr;

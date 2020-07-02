@@ -12,6 +12,7 @@
 - [Base stats data structure](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_base_stats_data_structure_in_Generation_I)
 - [__](https://hax.iimarckus.org/post/16313/#p16313)
 - [Text table](http://datacrystal.romhacking.net/wiki/Pok%C3%A9mon_Red_and_Blue:TBL)
+- [Decompresssion routine](https://www.youtube.com/watch?v=aF1Yw_wu2cM)
 
 ### Hardware specific
 

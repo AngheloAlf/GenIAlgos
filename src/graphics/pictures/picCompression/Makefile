@@ -1,5 +1,5 @@
 MODULE_NAME  = picCompression
-SOURCE_FILES = decompressPicture.c
+SOURCE_FILES = decompressPicture.c decompressBitplane.c decodeBitplanes.c
 
 LIBS            = 
 LIBS_PATHS      = -L.

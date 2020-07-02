@@ -25,7 +25,7 @@ int main(int argc, char **argv){
     readFile(compressed, size, filename, 0);
 
     uint8_t buffer[2*BUFFER_SIZE];
-    decompressPicture(BUFFER_SIZE, buffer, &buffer[BUFFER_SIZE], compressed);
+    picComp_decompressPicture(BUFFER_SIZE, buffer, &buffer[BUFFER_SIZE], compressed);
 
     writeFile(buffer, 2*BUFFER_SIZE, "buffer_dump.bin", 0);
 
