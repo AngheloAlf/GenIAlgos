@@ -3,12 +3,7 @@
 #include <string.h>
 #include <assert.h>
 
-static uint8_t SWAP(uint8_t number){
-    return ((number & 0x0F) << 4) | ((number & 0xF0) >> 4);
-}
-static uint8_t BIT(uint8_t number, uint8_t bit_i){
-    return (number >> bit_i) & 0x01;
-}
+#include "common/bitOperations/bitOperations.h"
 
 uint8_t delta_decode_byte(uint8_t byte, uint8_t *last_bit, bool mirror){
     assert(*last_bit < 2);

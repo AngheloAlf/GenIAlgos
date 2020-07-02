@@ -2,36 +2,18 @@
 
 #include <string.h>
 
-static uint8_t RLC(uint8_t number){
-    return ((number & 0b01111111) << 1) | ((number & 0b10000000) >> 7);
-}
-
-static uint8_t get_next_byte(BitIterator_t *bit_iterator){
-    uint8_t byte = bit_iterator->bytes_arr[bit_iterator->byte_index];
-    bit_iterator->byte_index += 1;
-    return byte;
-}
-static uint8_t get_next_bit(BitIterator_t *bit_iterator){
-    if(bit_iterator->bit_index == 0){
-        bit_iterator->actual_byte = get_next_byte(bit_iterator);
-        bit_iterator->bit_index = 8;
-    }
-    bit_iterator->bit_index -= 1;
-    bit_iterator->actual_byte = RLC(bit_iterator->actual_byte);
-    return bit_iterator->actual_byte & 0b0001;
-}
-
-
+#include "common/bitOperations/bitOperations.h"
+#include "common/dataStructures/dataStructures.h"
 
 uint8_t readBitPair(BitIterator_t *bit_iterator){
-    uint8_t pair = get_next_bit(bit_iterator) << 1;
-    return pair | get_next_bit(bit_iterator);
+    uint8_t pair = BitIterator_nextBit(bit_iterator) << 1;
+    return pair | BitIterator_nextBit(bit_iterator);
 }
 
 uint16_t readRlePacket(BitIterator_t *bit_iterator){
     uint16_t l = 0;
     size_t i = 1;
-    while(get_next_bit(bit_iterator)){
+    while(BitIterator_nextBit(bit_iterator)){
         l |= 1;
         l <<= 1;
         ++i;
@@ -39,7 +21,7 @@ uint16_t readRlePacket(BitIterator_t *bit_iterator){
     uint16_t v = 0;
     while(i--){
         v <<= 1;
-        v |= get_next_bit(bit_iterator);
+        v |= BitIterator_nextBit(bit_iterator);
     }
     return l + v + 1;
 }
@@ -78,7 +60,7 @@ uint16_t process_column(Matrix8_t *dstbuff, uint16_t buffer_index, BitIterator_t
 }
 
 void picComp_decompressBitplane(Matrix8_t *dstbuff, BitIterator_t *bit_iterator){
-    bool datapacketmode = get_next_bit(bit_iterator);
+    bool datapacketmode = BitIterator_nextBit(bit_iterator);
     uint16_t rle_zeros = 0;
     if(!datapacketmode){
         rle_zeros = readRlePacket(bit_iterator);

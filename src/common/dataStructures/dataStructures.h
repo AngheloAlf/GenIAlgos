@@ -22,4 +22,6 @@ typedef struct{
     uint8_t actual_byte;
 } BitIterator_t;
 
+uint8_t BitIterator_nextBit(BitIterator_t *bit_iterator);
+
 #endif /* COMMON_DATASTRUCTURES_H */

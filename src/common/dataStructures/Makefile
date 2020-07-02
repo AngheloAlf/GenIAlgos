@@ -1,12 +1,12 @@
-MODULE_NAME  = picCompression
-SOURCE_FILES = decompressPicture.c decompressBitplane.c decodeBitplanes.c
+MODULE_NAME  = dataStructures
+SOURCE_FILES = bitIterator.c
 
-LIBS            = -ldataStructures -lbitOperations
-LIBS_PATHS      = -L. -L../../../common/dataStructures -L../../../common/bitOperations
-INCLUDE_PATHS   = -I../../../
+LIBS            = -lbitOperations
+LIBS_PATHS      = -L. -L../bitOperations/
+INCLUDE_PATHS   = -I../../
 
-TEST_LIBS           = -lio -lnumbers -lerrorHandling
-TEST_LIBS_PATHS     = -L../../../utils/io/ -L../../../utils/numbers/ -L../../../utils/errorHandling/
+TEST_LIBS           = 
+TEST_LIBS_PATHS     = 
 TEST_INCLUDE_PATHS  = 
 
 STD         = -std=c11
